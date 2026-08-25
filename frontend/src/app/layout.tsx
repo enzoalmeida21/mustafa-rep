@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Montserrat, Outfit } from "next/font/google";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { CartProvider } from "@/lib/cart";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${outfit.variable} ${montserrat.variable} h-full`}>
+    <html lang="pt-BR" className={`${manrope.variable} ${cormorant.variable} h-full`}>
       <body className="relative z-10 flex min-h-full flex-col antialiased">
         <CartProvider>
           <SiteHeader />

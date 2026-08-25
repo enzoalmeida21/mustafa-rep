@@ -7,24 +7,18 @@ import { useEffect, useState } from "react";
 const slides = [
   {
     src: "/hero/expo-04.jpg",
-    eyebrow: "Mustafá Representações",
-    title: "Escolha a indústria. Entre no hall. Faça o pedido.",
-    subtitle:
-      "Experiência comercial deluxe: catálogos separados por indústria representada, com lista detalhada para o seu PDV.",
+    title: "Catálogo por indústria.",
+    subtitle: "Escolha o hall, consulte o mix e envie o pedido.",
   },
   {
     src: "/hero/expo-03.jpg",
-    eyebrow: "Halls comerciais",
-    title: "Oliveira, Pinheirense, Casafort, Wyda e Alklin.",
-    subtitle:
-      "Cada marca com seu próprio ambiente de consulta, preços e pedido.",
+    title: "Presença comercial refinada.",
+    subtitle: "Oliveira, Florapack, H2O, Crivialli e mais marcas representadas.",
   },
   {
     src: "/hero/expo-07.jpg",
-    eyebrow: "Pedido profissional",
-    title: "SKU, EAN, embalagem e preço em um só lugar.",
-    subtitle:
-      "Fluxo pensado para representação comercial — sem pagamento online, com confirmação Mustafá.",
+    title: "Pedido sem fricção.",
+    subtitle: "SKU, EAN, embalagem e preço em uma experiência limpa.",
   },
 ];
 
@@ -34,13 +28,13 @@ export function HeroBanner() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % slides.length);
-    }, 5200);
+    }, 5600);
     return () => window.clearInterval(timer);
   }, []);
 
   return (
     <section className="relative overflow-hidden bg-[var(--forest-deep)]">
-      <div className="relative h-[72vw] max-h-[620px] min-h-[420px] w-full md:h-[560px]">
+      <div className="relative h-[78vw] max-h-[640px] min-h-[460px] w-full md:h-[88vh] md:max-h-[720px] md:min-h-[560px]">
         <div
           className="banner-track"
           style={{ transform: `translateX(-${active * 100}%)` }}
@@ -49,64 +43,54 @@ export function HeroBanner() {
             <div key={slide.src} className="banner-slide">
               <Image
                 src={slide.src}
-                alt={slide.title}
+                alt=""
                 fill
                 priority={index === 0}
-                className="object-cover"
+                className="object-cover scale-[1.02]"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[rgba(20,6,32,0.92)] via-[rgba(31,10,48,0.62)] to-[rgba(31,10,48,0.2)]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(20,6,32,0.65)] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(16,5,26,0.88)_0%,rgba(26,10,40,0.55)_48%,rgba(26,10,40,0.18)_100%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(16,5,26,0.55)_0%,transparent_42%)]" />
             </div>
           ))}
         </div>
 
         <div className="pointer-events-none absolute inset-0 z-10">
-          <div className="container flex h-full flex-col justify-end pb-10 pt-16 text-white md:pb-14">
+          <div className="container flex h-full flex-col justify-end pb-12 pt-20 text-white md:pb-16">
             <div className="pointer-events-auto max-w-2xl">
-              <div className="mb-5 inline-flex rounded-2xl bg-white/95 px-4 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.25)]">
-                <Image
-                  src="/brand/logo-mustafa.png"
-                  alt="Mustafá Representações"
-                  width={180}
-                  height={90}
-                  style={{ width: "160px", height: "auto" }}
-                  priority
-                />
-              </div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[var(--gold)]">
-                {slides[active].eyebrow}
+              <p className="eyebrow fade-rise text-[var(--gold-soft)]">
+                Mustafá Representações
               </p>
-              <h1 className="mt-3 text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+              <h1
+                key={slides[active].title}
+                className="display fade-rise mt-4 text-[clamp(2.8rem,7vw,5.4rem)] text-white"
+              >
                 {slides[active].title}
               </h1>
-              <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/85 md:text-base">
+              <p className="fade-rise-delay mt-5 max-w-lg text-[0.98rem] leading-relaxed text-white/78 md:text-lg">
                 {slides[active].subtitle}
               </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a href="#industrias" className="btn btn-ghost">
+              <div className="fade-rise-delay mt-8 flex flex-wrap gap-3">
+                <a href="#industrias" className="btn btn-gold">
                   Escolher indústria
                 </a>
-                <Link
-                  href="/contato"
-                  className="btn border-white/40 bg-transparent text-white hover:bg-white hover:text-[var(--forest-deep)]"
-                >
+                <Link href="/contato" className="btn btn-ghost">
                   Falar com a Mustafá
                 </Link>
               </div>
             </div>
 
-            <div className="pointer-events-auto mt-8 flex items-center gap-2">
+            <div className="pointer-events-auto mt-10 flex items-center gap-2">
               {slides.map((slide, index) => (
                 <button
                   key={slide.src}
                   type="button"
                   aria-label={`Ir para slide ${index + 1}`}
                   onClick={() => setActive(index)}
-                  className={`h-1.5 rounded-full transition-all ${
+                  className={`h-px rounded-full transition-all duration-500 ${
                     index === active
-                      ? "w-8 bg-[var(--gold)]"
-                      : "w-3 bg-white/40 hover:bg-white/70"
+                      ? "w-10 bg-[var(--gold)]"
+                      : "w-5 bg-white/35 hover:bg-white/70"
                   }`}
                 />
               ))}

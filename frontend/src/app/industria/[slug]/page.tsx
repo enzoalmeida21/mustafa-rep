@@ -33,46 +33,36 @@ export default async function IndustryHallPage({ params }: Props) {
   const products = industry.products ?? [];
 
   return (
-    <div className="pb-16">
+    <div className="pb-20">
       <section className="relative overflow-hidden bg-[var(--forest-deep)]">
-        <div className="relative min-h-[340px] md:min-h-[420px]">
+        <div className="relative min-h-[360px] md:min-h-[440px]">
           {industry.coverImage ? (
             <Image
               src={industry.coverImage}
-              alt={`Hall ${industry.name}`}
+              alt=""
               fill
               priority
-              className="object-cover opacity-55"
+              className="object-cover opacity-45"
               sizes="100vw"
             />
           ) : null}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `linear-gradient(120deg, rgba(20,6,32,0.92) 0%, rgba(20,6,32,0.7) 45%, ${industry.accentColor}88 100%)`,
-            }}
-          />
-          <div className="container relative z-10 flex min-h-[340px] flex-col justify-end pb-10 pt-16 text-white md:min-h-[420px] md:pb-12">
+          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(16,5,26,0.9)_0%,rgba(26,10,40,0.62)_55%,rgba(26,10,40,0.35)_100%)]" />
+          <div className="container relative z-10 flex min-h-[360px] flex-col justify-end pb-12 pt-20 text-white md:min-h-[440px]">
             <Link
               href="/#industrias"
-              className="mb-5 w-fit text-xs font-bold uppercase tracking-[0.16em] text-white/75 hover:text-[var(--gold)]"
+              className="mb-6 w-fit text-[0.7rem] font-semibold tracking-[0.18em] text-white/65 uppercase transition hover:text-[var(--gold-soft)]"
             >
               ← Todas as indústrias
             </Link>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--gold)]">
-              Hall comercial
-            </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight md:text-6xl">
+            <p className="eyebrow text-[var(--gold-soft)]">Hall comercial</p>
+            <h1 className="display mt-3 text-[clamp(3rem,8vw,5.5rem)]">
               {industry.name}
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/85 md:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">
               {industry.description ?? industry.tagline}
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
-              <span
-                className="rounded-full px-3 py-1.5 font-bold text-white"
-                style={{ background: industry.accentColor }}
-              >
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <span className="text-[0.72rem] font-semibold tracking-[0.16em] text-white/70 uppercase">
                 {products.length} produto{products.length === 1 ? "" : "s"}
               </span>
               <Link href="/carrinho" className="btn btn-ghost">
@@ -83,18 +73,16 @@ export default async function IndustryHallPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="container py-10 md:py-12">
-        <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+      <section className="container py-12 md:py-16">
+        <div className="mb-8 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--gold)]">
-              Catálogo da indústria
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-[var(--ink)] md:text-3xl">
-              Lista detalhada de produtos
+            <p className="eyebrow">Catálogo</p>
+            <h2 className="display mt-2 text-3xl text-[var(--ink)] md:text-4xl">
+              Lista de produtos
             </h2>
           </div>
-          <p className="text-sm text-[var(--ink-soft)]">
-            Consulte SKU, EAN, embalagem e preço antes de pedir.
+          <p className="max-w-sm text-sm leading-relaxed text-[var(--ink-soft)]">
+            Consulte SKU, EAN, embalagem e preço antes de montar o pedido.
           </p>
         </div>
 
