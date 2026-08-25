@@ -1,21 +1,12 @@
 import type { Category, Industry, Order, Product } from "./types";
 
-function getApiBase() {
-  const explicit = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
-  const isLocalhost =
-    !!explicit && /localhost|127\.0\.0\.1/.test(explicit);
-
-  // Em produção na Vercel, ignora localhost e usa as rotas /api do Next.js.
-  if (process.env.VERCEL && (!explicit || isLocalhost)) {
-    const site =
-      process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
-    if (site) return `${site}/api`;
-  }
-
-  if (explicit) return explicit;
-  return "http://localhost:8080";
-}
+/**
+ * Em produção, defina NEXT_PUBLIC_API_URL com a URL do Cloud Run
+ * (ex.: https://mustafa-api-xxxxx-uc.a.run.app ou https://api.mustafarep.com).
+ */
+const API_URL = (
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"
+).replace(/\/$/, "");
 
 async function request<T>(
   path: string,
@@ -30,7 +21,7 @@ async function request<T>(
     headers.set("Authorization", `Bearer ${token}`);
   }
 
-  const response = await fetch(`${getApiBase()}${path}`, {
+  const response = await fetch(`${API_URL}${path}`, {
     ...options,
     headers,
     cache: "no-store",
