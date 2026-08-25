@@ -40,14 +40,18 @@ with check (bucket_id = 'products');
 
 1. Crie um projeto GCP e habilite Cloud Run + Secret Manager + Artifact Registry / Container Registry
 2. Crie secrets: `DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_JWT_SECRET`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `ORDER_NOTIFY_EMAIL`, `ADMIN_EMAILS`, `WHATSAPP_NUMBER`, `CORS_ORIGIN`
-3. **Importante:** o `Dockerfile` está em `backend/`, não na raiz. Use o `cloudbuild.yaml` da raiz.
+3. **Importante:** há um `Dockerfile` na **raiz** do repo (builda a pasta `backend/`). O trigger padrão do Cloud Build já encontra esse arquivo.
 
 ### Trigger no Cloud Build (GitHub)
 
-1. Em Cloud Build → Triggers → Edit
-2. Em **Configuration**, escolha **Cloud Build configuration file (yaml or json)**
-3. Localização: `/cloudbuild.yaml` (raiz do repo)
-4. NÃO use "Dockerfile" na raiz — isso causa o erro `lstat /workspace/Dockerfile: no such file or directory`
+Opção A — **Dockerfile** (padrão):
+- Configuration type: Dockerfile
+- Dockerfile location: `/Dockerfile` (raiz)
+- Isso resolve o erro `lstat /workspace/Dockerfile: no such file or directory`
+
+Opção B — **cloudbuild.yaml**:
+- Configuration type: Cloud Build configuration file
+- Location: `/cloudbuild.yaml`
 
 ### Build manual
 

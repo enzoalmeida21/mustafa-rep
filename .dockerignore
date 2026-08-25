@@ -1,0 +1,15 @@
+.dockerignore
+node_modules
+**/node_modules
+frontend
+supabase
+.git
+.gitignore
+*.md
+.env
+.env.*
+!**/.env.example
+backend/dist
+backend/.env
+docker-compose.yml
+.cursor

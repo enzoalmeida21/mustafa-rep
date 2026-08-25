@@ -1,5 +1,5 @@
-# Cloud Build — API Mustafá (pasta backend/)
-# No trigger do Cloud Build, use "Cloud Build configuration file" → /cloudbuild.yaml
+# Cloud Build — API Mustafá
+# Funciona com trigger "Dockerfile" na raiz OU com este yaml.
 
 substitutions:
   _SERVICE: mustafa-api
@@ -15,8 +15,8 @@ steps:
       - -t
       - gcr.io/$PROJECT_ID/${_SERVICE}:latest
       - -f
-      - backend/Dockerfile
-      - backend
+      - Dockerfile
+      - .
 
   - name: gcr.io/cloud-builders/docker
     id: Push
