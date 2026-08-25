@@ -1,11 +1,26 @@
 import type { Category, Industry, Order, Product } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+function getApiBase() {
+  const explicit = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+  const isLocalhost =
+    !!explicit && /localhost|127\.0\.0\.1/.test(explicit);
+
+  // Em produção na Vercel, ignora localhost e usa as rotas /api do Next.js.
+  if (process.env.VERCEL && (!explicit || isLocalhost)) {
+    const site =
+      process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "");
+    if (site) return `${site}/api`;
+  }
+
+  if (explicit) return explicit;
+  return "http://localhost:8080";
+}
 
 async function request<T>(
   path: string,
   options: RequestInit = {},
-  token?: string
+  token?: string,
 ): Promise<T> {
   const headers = new Headers(options.headers);
   if (!headers.has("Content-Type") && options.body) {
@@ -15,7 +30,7 @@ async function request<T>(
     headers.set("Authorization", `Bearer ${token}`);
   }
 
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${getApiBase()}${path}`, {
     ...options,
     headers,
     cache: "no-store",
@@ -24,7 +39,7 @@ async function request<T>(
   if (!response.ok) {
     const error = await response.json().catch(() => ({ error: "Request failed" }));
     throw new Error(
-      typeof error.error === "string" ? error.error : "Falha na requisição"
+      typeof error.error === "string" ? error.error : "Falha na requisição",
     );
   }
 
@@ -55,38 +70,58 @@ export const api = {
   adminCategories: (token: string) =>
     request<Category[]>("/admin/categories", {}, token),
   createCategory: (token: string, body: unknown) =>
-    request<Category>("/admin/categories", {
-      method: "POST",
-      body: JSON.stringify(body),
-    }, token),
+    request<Category>(
+      "/admin/categories",
+      {
+        method: "POST",
+        body: JSON.stringify(body),
+      },
+      token,
+    ),
   updateCategory: (token: string, id: string, body: unknown) =>
-    request<Category>(`/admin/categories/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify(body),
-    }, token),
+    request<Category>(
+      `/admin/categories/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(body),
+      },
+      token,
+    ),
   adminProducts: (token: string) =>
     request<Product[]>("/admin/products", {}, token),
   createProduct: (token: string, body: unknown) =>
-    request<Product>("/admin/products", {
-      method: "POST",
-      body: JSON.stringify(body),
-    }, token),
+    request<Product>(
+      "/admin/products",
+      {
+        method: "POST",
+        body: JSON.stringify(body),
+      },
+      token,
+    ),
   updateProduct: (token: string, id: string, body: unknown) =>
-    request<Product>(`/admin/products/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify(body),
-    }, token),
+    request<Product>(
+      `/admin/products/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(body),
+      },
+      token,
+    ),
   deleteProduct: (token: string, id: string) =>
     request<{ ok: boolean }>(`/admin/products/${id}`, { method: "DELETE" }, token),
   adminOrders: (token: string, status?: string) =>
     request<Order[]>(
       `/admin/orders${status ? `?status=${status}` : ""}`,
       {},
-      token
+      token,
     ),
   updateOrder: (token: string, id: string, status: string) =>
-    request<Order>(`/admin/orders/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify({ status }),
-    }, token),
+    request<Order>(
+      `/admin/orders/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ status }),
+      },
+      token,
+    ),
 };
