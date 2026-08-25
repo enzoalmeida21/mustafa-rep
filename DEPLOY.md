@@ -38,15 +38,32 @@ with check (bucket_id = 'products');
 
 ## 2. GCP Cloud Run (API)
 
-1. Crie um projeto GCP e habilite Cloud Run + Secret Manager + Artifact Registry
+1. Crie um projeto GCP e habilite Cloud Run + Secret Manager + Artifact Registry / Container Registry
 2. Crie secrets: `DATABASE_URL`, `SUPABASE_URL`, `SUPABASE_JWT_SECRET`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `ORDER_NOTIFY_EMAIL`, `ADMIN_EMAILS`, `WHATSAPP_NUMBER`, `CORS_ORIGIN`
-3. Build e deploy:
+3. **Importante:** o `Dockerfile` está em `backend/`, não na raiz. Use o `cloudbuild.yaml` da raiz.
+
+### Trigger no Cloud Build (GitHub)
+
+1. Em Cloud Build → Triggers → Edit
+2. Em **Configuration**, escolha **Cloud Build configuration file (yaml or json)**
+3. Localização: `/cloudbuild.yaml` (raiz do repo)
+4. NÃO use "Dockerfile" na raiz — isso causa o erro `lstat /workspace/Dockerfile: no such file or directory`
+
+### Build manual
 
 ```bash
-cd backend
-gcloud builds submit --tag gcr.io/PROJECT_ID/mustafa-api
+# Na raiz do repo
+gcloud builds submit --config=cloudbuild.yaml
+
+# Ou só a imagem, a partir da pasta backend:
+gcloud builds submit ./backend --tag gcr.io/PROJECT_ID/mustafa-api
+```
+
+### Deploy Cloud Run (se o yaml não fizer deploy automático)
+
+```bash
 gcloud run deploy mustafa-api \
-  --image gcr.io/PROJECT_ID/mustafa-api \
+  --image gcr.io/PROJECT_ID/mustafa-api:latest \
   --region southamerica-east1 \
   --allow-unauthenticated \
   --set-secrets=DATABASE_URL=DATABASE_URL:latest,SUPABASE_URL=SUPABASE_URL:latest,SUPABASE_JWT_SECRET=SUPABASE_JWT_SECRET:latest,SUPABASE_SERVICE_ROLE_KEY=SUPABASE_SERVICE_ROLE_KEY:latest,RESEND_API_KEY=RESEND_API_KEY:latest \
