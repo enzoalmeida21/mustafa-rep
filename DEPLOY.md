@@ -63,7 +63,29 @@ gcloud builds submit --config=cloudbuild.yaml
 gcloud builds submit ./backend --tag gcr.io/PROJECT_ID/mustafa-api
 ```
 
-### Deploy Cloud Run (se o yaml não fizer deploy automático)
+### Variáveis obrigatórias no Cloud Run
+
+Sem estas variáveis o container sobe (`/health`), mas catálogo/pedidos falham:
+
+```
+DATABASE_URL
+SUPABASE_URL
+SUPABASE_JWT_SECRET
+```
+
+Recomendadas:
+
+```
+SUPABASE_SERVICE_ROLE_KEY
+CORS_ORIGIN=https://mustafarep.com,https://www.mustafarep.com
+RESEND_API_KEY
+ORDER_NOTIFY_EMAIL
+ADMIN_EMAILS
+WHATSAPP_NUMBER
+EMAIL_FROM
+```
+
+No Console: Cloud Run → serviço → Edit & deploy → Variables & Secrets.
 
 ```bash
 gcloud run deploy mustafa-api \

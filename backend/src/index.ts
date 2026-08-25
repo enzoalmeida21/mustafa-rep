@@ -1,6 +1,6 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
-import { assertRuntimeEnv, env } from "./lib/env.js";
+import { env, missingRuntimeEnv, warnRuntimeEnv } from "./lib/env.js";
 import { categoryRoutes } from "./routes/categories.js";
 import { healthRoutes } from "./routes/health.js";
 import { industryRoutes } from "./routes/industries.js";
@@ -8,14 +8,19 @@ import { orderRoutes } from "./routes/orders.js";
 import { productRoutes } from "./routes/products.js";
 
 async function main() {
-  assertRuntimeEnv();
+  warnRuntimeEnv();
 
   const app = Fastify({
     logger: true,
   });
 
+  const origins = env.corsOrigin
+    .split(",")
+    .map((o) => o.trim())
+    .filter(Boolean);
+
   await app.register(cors, {
-    origin: env.corsOrigin.split(",").map((o) => o.trim()),
+    origin: origins.includes("*") ? true : origins,
     credentials: true,
   });
 
@@ -25,10 +30,18 @@ async function main() {
   await app.register(productRoutes);
   await app.register(orderRoutes);
 
-  await app.listen({ port: env.port, host: "0.0.0.0" });
+  const port = Number(process.env.PORT ?? env.port ?? 8080);
+  await app.listen({ port, host: "0.0.0.0" });
+  app.log.info(
+    {
+      port,
+      missingEnv: missingRuntimeEnv(),
+    },
+    "mustafa-api listening"
+  );
 }
 
 main().catch((error) => {
-  console.error(error);
+  console.error("Fatal startup error:", error);
   process.exit(1);
 });
