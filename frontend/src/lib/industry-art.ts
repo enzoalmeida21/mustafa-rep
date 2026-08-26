@@ -2,7 +2,7 @@ import type { Industry } from "./types";
 
 type ArtIndustry = Pick<Industry, "slug" | "accentColor" | "logoImage" | "coverImage">;
 
-const WHITE_LOGO_SLUGS = new Set(["h2o"]);
+const WHITE_LOGO_SLUGS = new Set(["h2o", "florapack"]);
 
 export function industryArt(industry: ArtIndustry) {
   const src = industry.logoImage ?? industry.coverImage ?? null;

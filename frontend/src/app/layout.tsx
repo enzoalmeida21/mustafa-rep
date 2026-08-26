@@ -25,6 +25,14 @@ export const metadata: Metadata = {
   description:
     "Catálogo e pedidos da Mustafá Representadas. Veja produtos, preços e envie seu pedido online.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://mustafarep.com"),
+  applicationName: "Mustafá Representações",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
