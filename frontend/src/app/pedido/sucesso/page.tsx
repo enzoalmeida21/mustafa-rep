@@ -11,12 +11,12 @@ function SuccessContent() {
 
   return (
     <div className="container py-16 md:py-24">
-      <div className="fade-up max-w-2xl border border-[var(--line)] bg-white/65 p-8 md:p-12">
-        <p className="text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
-          Pedido recebido
-        </p>
-        <h1 className="display mt-3 text-5xl">Obrigado!</h1>
-        <p className="mt-4 text-lg text-[var(--ink-soft)]">
+      <div className="surface fade-rise max-w-2xl rounded-[var(--radius)] p-8 md:p-12">
+        <p className="eyebrow">Pedido recebido</p>
+        <h1 className="display mt-4 text-[clamp(2.25rem,5vw,3.25rem)] text-[var(--forest)]">
+          Obrigado!
+        </h1>
+        <p className="mt-4 text-lg leading-relaxed text-[var(--ink-soft)]">
           Seu pedido {number ? <strong>{number}</strong> : ""} foi enviado para a
           equipe Mustafá. Em breve entram em contato para confirmar.
         </p>
@@ -37,7 +37,11 @@ function SuccessContent() {
 
 export default function SuccessPage() {
   return (
-    <Suspense fallback={<div className="container py-16">Carregando...</div>}>
+    <Suspense
+      fallback={
+        <div className="container py-16 text-[var(--ink-soft)]">Carregando…</div>
+      }
+    >
       <SuccessContent />
     </Suspense>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
 import type { Product } from "@/lib/types";
 
@@ -15,22 +15,32 @@ export function AddToCartButton({
 }) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
+  const timer = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => window.clearTimeout(timer.current), []);
+
+  function add() {
+    addItem(product);
+    setAdded(true);
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => setAdded(false), 1200);
+  }
 
   if (icon) {
     return (
       <button
         type="button"
-        aria-label={`Adicionar ${product.name}`}
-        className="absolute bottom-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--forest)] text-lg font-medium text-white shadow-[0_8px_20px_rgba(59,19,87,0.22)] transition hover:scale-105 hover:bg-[var(--forest-deep)]"
+        aria-label={`Adicionar ${product.name} ao pedido`}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          addItem(product);
-          setAdded(true);
-          window.setTimeout(() => setAdded(false), 1000);
+          add();
         }}
+        className={`absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full text-lg leading-none font-medium text-white shadow-[0_8px_20px_rgba(59,19,87,0.24)] transition duration-300 hover:scale-105 ${
+          added ? "bg-[#0f6b45]" : "bg-[var(--forest)] hover:bg-[var(--forest-deep)]"
+        }`}
       >
-        {added ? "✓" : "+"}
+        <span aria-hidden>{added ? "✓" : "+"}</span>
       </button>
     );
   }
@@ -38,14 +48,10 @@ export function AddToCartButton({
   return (
     <button
       type="button"
-      className={`btn ${compact ? "btn-secondary px-3 text-sm" : "btn-primary"}`}
-      onClick={() => {
-        addItem(product);
-        setAdded(true);
-        window.setTimeout(() => setAdded(false), 1200);
-      }}
+      onClick={add}
+      className={`btn ${compact ? "btn-secondary px-4" : "btn-primary"}`}
     >
-      {added ? "Adicionado" : compact ? "Adicionar" : "Adicionar ao pedido"}
+      {added ? "Adicionado ✓" : compact ? "Adicionar" : "Adicionar ao pedido"}
     </button>
   );
 }

@@ -13,35 +13,43 @@ export default function ContactPage() {
   return (
     <div className="container max-w-2xl py-16 md:py-24">
       <p className="eyebrow">Contato</p>
-      <h1 className="display mt-4 text-5xl text-[var(--forest)] md:text-6xl">
+      <h1 className="display mt-4 text-[clamp(2.25rem,5.5vw,3.75rem)] text-[var(--forest)]">
         Fale com a Mustafá
       </h1>
-      <p className="mt-5 text-lg leading-relaxed text-[var(--ink-soft)]">
+      <p className="mt-5 text-[1.05rem] leading-relaxed text-[var(--ink-soft)] md:text-lg">
         Atendimento comercial, pedidos e ativação em loja para o seu PDV.
       </p>
-      <div className="mt-10 space-y-4 border-y border-[var(--line)] py-8 text-[var(--ink)]">
-        <p>
-          <span className="text-[0.72rem] font-semibold tracking-[0.14em] text-[var(--ink-soft)] uppercase">
+
+      <dl className="mt-12 grid gap-8 border-y border-[var(--line)] py-10 sm:grid-cols-2">
+        <div>
+          <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-[var(--ink-mute)] uppercase">
             Site
-          </span>
-          <br />
-          mustafarep.com
-        </p>
-        <p>
-          <span className="text-[0.72rem] font-semibold tracking-[0.14em] text-[var(--ink-soft)] uppercase">
+          </dt>
+          <dd className="mt-2 font-medium text-[var(--ink)]">mustafarep.com</dd>
+        </div>
+        <div>
+          <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-[var(--ink-mute)] uppercase">
             Pedidos
-          </span>
-          <br />
-          pelo catálogo e checkout do portal
-        </p>
-      </div>
+          </dt>
+          <dd className="mt-2 text-[var(--ink-soft)]">
+            Pelo catálogo e checkout do portal
+          </dd>
+        </div>
+      </dl>
+
       {wa ? (
-        <a href={wa} target="_blank" rel="noreferrer" className="btn btn-primary mt-8">
+        <a
+          href={wa}
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn-primary mt-10"
+        >
           Abrir WhatsApp
         </a>
       ) : (
-        <p className="mt-8 text-sm text-[var(--ink-soft)]">
-          Configure NEXT_PUBLIC_WHATSAPP_NUMBER para habilitar o atalho.
+        <p className="mt-10 text-sm text-[var(--ink-mute)]">
+          Configure <code>NEXT_PUBLIC_WHATSAPP_NUMBER</code> para habilitar o
+          atalho do WhatsApp.
         </p>
       )}
     </div>

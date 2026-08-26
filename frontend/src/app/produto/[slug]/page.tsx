@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { api } from "@/lib/api";
-import { formatBRL, hasListPrice } from "@/lib/format";
+import { formatBRL, formatProductName, hasListPrice } from "@/lib/format";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -13,7 +13,10 @@ export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   try {
     const product = await api.getProduct(slug);
-    return { title: product.name, description: product.description };
+    return {
+      title: formatProductName(product.name),
+      description: product.description,
+    };
   } catch {
     return { title: "Produto" };
   }
@@ -40,19 +43,24 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="container grid gap-10 py-10 md:grid-cols-2 md:gap-14 md:py-16">
-      <div className="relative aspect-square overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[linear-gradient(160deg,#f4eef7_0%,#faf7fb_100%)]">
+      <div className="relative aspect-square overflow-hidden rounded-[var(--radius)] border border-[var(--line)]">
         {product.imageUrl ? (
           <Image
             src={product.imageUrl}
-            alt={product.name}
+            alt={formatProductName(product.name)}
             fill
             className="object-contain p-8"
-            sizes="(max-width:768px) 100vw, 50vw"
+            sizes="(min-width: 768px) 34rem, 100vw"
             priority
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-sm tracking-[0.12em] text-[var(--ink-soft)] uppercase">
-            Sem imagem
+          <div className="brand-tile">
+            <span className="brand-tile-mark text-[clamp(3rem,10vw,4.5rem)]">
+              {(product.brand ?? product.name).trim().slice(0, 2).toUpperCase()}
+            </span>
+            <span className="brand-tile-label">
+              {product.brand ?? product.industry?.name ?? "Mustafá"}
+            </span>
           </div>
         )}
       </div>
@@ -64,13 +72,13 @@ export default async function ProductPage({ params }: Props) {
         {product.industry ? (
           <Link
             href={`/industria/${product.industry.slug}`}
-            className="mt-2 inline-flex text-[0.68rem] font-semibold tracking-[0.16em] text-[var(--gold)] uppercase transition hover:text-[var(--forest)]"
+            className="mt-1 inline-flex h-8 w-fit items-center text-[0.68rem] font-semibold tracking-[0.16em] text-[var(--gold)] uppercase transition hover:text-[var(--forest)]"
           >
-            Hall {product.industry.name}
+            Hall {product.industry.name} →
           </Link>
         ) : null}
-        <h1 className="display mt-3 text-4xl text-[var(--ink)] md:text-5xl">
-          {product.name}
+        <h1 className="display mt-3 text-[clamp(2rem,4.5vw,3rem)] text-[var(--ink)]">
+          {formatProductName(product.name)}
         </h1>
         <p className="mt-3 text-sm text-[var(--ink-soft)]">
           {product.packLabel ?? product.unit}
@@ -85,22 +93,35 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         <div className="mt-8 border-y border-[var(--line)] py-6">
-          {product.compareAtPrice ? (
-            <p className="text-sm text-[var(--ink-soft)] line-through">
-              {formatBRL(product.compareAtPrice)}
-            </p>
-          ) : null}
-          <p className="text-3xl font-semibold tracking-tight text-[var(--forest)]">
-            {formatBRL(product.price)}
-            {hasListPrice(product.price) ? (
-              <span className="ml-2 text-sm font-medium text-[var(--ink-soft)]">
-                / {product.unit}
-              </span>
-            ) : null}
-          </p>
-          {discount ? (
-            <p className="mt-2 text-sm font-medium text-[#1f7a52]">−{discount}%</p>
-          ) : null}
+          {hasListPrice(product.price) ? (
+            <>
+              {product.compareAtPrice && hasListPrice(product.compareAtPrice) ? (
+                <p className="text-sm text-[var(--ink-mute)] line-through">
+                  {formatBRL(product.compareAtPrice)}
+                </p>
+              ) : null}
+              <p className="text-3xl font-semibold tracking-tight text-[var(--forest)]">
+                {formatBRL(product.price)}
+                <span className="ml-2 text-sm font-medium text-[var(--ink-mute)]">
+                  / {product.unit}
+                </span>
+              </p>
+              {discount ? (
+                <p className="mt-2 text-sm font-medium text-[#0f6b45]">
+                  −{discount}%
+                </p>
+              ) : null}
+            </>
+          ) : (
+            <>
+              <p className="text-xl font-semibold tracking-[0.04em] text-[var(--gold)] uppercase">
+                Sob consulta
+              </p>
+              <p className="mt-2 text-sm text-[var(--ink-soft)]">
+                Adicione ao pedido e a Mustafá retorna com o preço.
+              </p>
+            </>
+          )}
         </div>
 
         <div className="mt-7 flex flex-wrap gap-3">
