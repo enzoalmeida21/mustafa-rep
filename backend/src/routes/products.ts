@@ -11,7 +11,7 @@ const productBody = z.object({
   description: z.string().min(1),
   price: z.coerce.number().positive(),
   compareAtPrice: z.coerce.number().positive().optional().nullable(),
-  unit: z.string().min(1).default("unid."),
+  unit: z.string().min(1).default("cx"),
   packLabel: z.string().optional().nullable(),
   ean: z.string().optional().nullable(),
   sku: z.string().optional().nullable(),

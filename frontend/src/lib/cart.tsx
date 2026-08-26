@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { formatSaleUnit } from "./format";
 import type { CartItem, Product } from "./types";
 
 type CartContextValue = {
@@ -70,7 +71,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
               slug: product.slug,
               name: product.name,
               price: product.price,
-              unit: product.unit,
+              unit: formatSaleUnit(product.unit),
+              packLabel: product.packLabel,
               imageUrl: product.imageUrl,
               quantity,
             },

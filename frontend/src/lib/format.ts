@@ -1,3 +1,16 @@
+const UNIT_ALIASES = /^(unid\.?|un\.?|und\.?|unidade|unidades)$/i;
+
+/** Unidade comercial da Mustafá: venda somente em caixas. */
+export function formatSaleUnit(unit?: string | null) {
+  const raw = unit?.trim() ?? "";
+  if (!raw || UNIT_ALIASES.test(raw)) return "cx";
+  return raw;
+}
+
+export function formatSaleQty(quantity: number, unit?: string | null) {
+  return `${quantity} ${formatSaleUnit(unit)}`;
+}
+
 export function hasListPrice(value: string | number | null | undefined) {
   const amount = typeof value === "string" ? Number(value) : Number(value ?? 0);
   return Number.isFinite(amount) && amount > 0;

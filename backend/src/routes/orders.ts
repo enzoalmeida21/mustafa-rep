@@ -29,6 +29,14 @@ const statusBody = z.object({
   status: z.enum(["novo", "em_analise", "confirmado", "enviado", "cancelado"]),
 });
 
+function saleUnit(unit: string) {
+  const normalized = unit.trim().toLowerCase();
+  if (!normalized || /^(unid\.?|un\.?|und\.?|unidade|unidades)$/.test(normalized)) {
+    return "cx";
+  }
+  return unit.trim();
+}
+
 function generateOrderNumber() {
   const now = new Date();
   const stamp = [
@@ -65,7 +73,7 @@ export const orderRoutes: FastifyPluginAsync = async (app) => {
       return {
         productId: product.id,
         productName: product.name,
-        unit: product.unit,
+        unit: saleUnit(product.unit),
         unitPrice,
         quantity: item.quantity,
         lineTotal,

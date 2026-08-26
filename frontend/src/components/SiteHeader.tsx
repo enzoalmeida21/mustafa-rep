@@ -157,7 +157,7 @@ export function SiteHeader() {
         <div className="ml-auto flex shrink-0 items-center gap-2 md:ml-0">
           <Link
             href="/carrinho"
-            aria-label={`Meu pedido, ${count} ${count === 1 ? "item" : "itens"}`}
+            aria-label={`Meu pedido, ${count} ${count === 1 ? "caixa" : "caixas"}`}
             className={`inline-flex h-10 items-center gap-2 rounded-full bg-[var(--forest)] px-3.5 text-[0.74rem] font-semibold tracking-[0.08em] text-white uppercase transition hover:bg-[var(--forest-deep)] md:px-4 ${
               pulse ? "cart-pulse" : ""
             }`}

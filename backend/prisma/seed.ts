@@ -91,7 +91,7 @@ async function main() {
         slug: product.slug,
         description: product.description,
         price: product.price,
-        unit: product.unit ?? "unid.",
+        unit: product.unit ?? "cx",
         packLabel: product.packLabel ?? undefined,
         ean: product.ean ?? undefined,
         sku: product.sku ?? undefined,

@@ -3,7 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/AddToCartButton";
 import { api } from "@/lib/api";
-import { formatBRL, formatProductName, hasListPrice } from "@/lib/format";
+import {
+  formatBRL,
+  formatProductName,
+  formatSaleUnit,
+  hasListPrice,
+} from "@/lib/format";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -81,7 +86,10 @@ export default async function ProductPage({ params }: Props) {
           {formatProductName(product.name)}
         </h1>
         <p className="mt-3 text-sm text-[var(--ink-soft)]">
-          {product.packLabel ?? product.unit}
+          {product.packLabel ?? "Venda por caixa"}
+        </p>
+        <p className="mt-1 text-xs font-semibold tracking-[0.12em] text-[var(--ink-mute)] uppercase">
+          Pedido em caixas fechadas
         </p>
         <p className="mt-5 text-base leading-relaxed text-[var(--ink-soft)]">
           {product.description}
@@ -103,7 +111,7 @@ export default async function ProductPage({ params }: Props) {
               <p className="text-3xl font-semibold tracking-tight text-[var(--forest)]">
                 {formatBRL(product.price)}
                 <span className="ml-2 text-sm font-medium text-[var(--ink-mute)]">
-                  / {product.unit}
+                  / {formatSaleUnit(product.unit)}
                 </span>
               </p>
               {discount ? (

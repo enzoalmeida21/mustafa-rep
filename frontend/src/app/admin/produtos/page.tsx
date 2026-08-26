@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useAdminAuth } from "@/lib/admin-auth";
-import { formatBRL } from "@/lib/format";
+import { formatBRL, formatSaleUnit } from "@/lib/format";
 import { uploadProductImage } from "@/lib/supabase";
 import type { Category, Product } from "@/lib/types";
 
@@ -68,7 +68,7 @@ export default function AdminProductsPage() {
         slug: slugify(name),
         description: String(form.get("description")),
         price: Number(form.get("price")),
-        unit: String(form.get("unit") || "un"),
+        unit: String(form.get("unit") || "cx"),
         categoryId: String(form.get("categoryId")),
         imageUrl,
         featured: form.get("featured") === "on",
@@ -102,8 +102,8 @@ export default function AdminProductsPage() {
               <input id="price" name="price" type="number" step="0.01" min="0.01" required />
             </div>
             <div className="field">
-              <label htmlFor="unit">Unidade</label>
-              <input id="unit" name="unit" defaultValue="un" required />
+              <label htmlFor="unit">Unidade de venda</label>
+              <input id="unit" name="unit" defaultValue="cx" required />
             </div>
             <div className="field">
               <label htmlFor="categoryId">Categoria</label>
@@ -143,7 +143,8 @@ export default function AdminProductsPage() {
               <div>
                 <p className="font-semibold">{product.name}</p>
                 <p className="text-sm text-[var(--ink-soft)]">
-                  {product.category?.name} · {formatBRL(product.price)} / {product.unit}
+                  {product.category?.name} · {formatBRL(product.price)} /{" "}
+                  {formatSaleUnit(product.unit)}
                 </p>
                 <p className="text-xs text-[var(--ink-soft)]">
                   {product.active ? "Ativo" : "Inativo"}

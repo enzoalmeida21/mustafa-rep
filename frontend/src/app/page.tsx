@@ -11,7 +11,7 @@ const pillars = [
   },
   {
     title: "Informação completa",
-    body: "SKU, EAN, embalagem e unidade de venda visíveis antes do pedido.",
+    body: "SKU, EAN, embalagem e venda por caixa visíveis antes do pedido.",
   },
   {
     title: "Pedido direto",

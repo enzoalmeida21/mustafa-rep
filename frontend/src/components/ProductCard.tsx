@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatBRL, formatProductName, hasListPrice } from "@/lib/format";
+import {
+  formatBRL,
+  formatProductName,
+  formatSaleUnit,
+  hasListPrice,
+} from "@/lib/format";
 import type { Product } from "@/lib/types";
 import { AddToCartButton } from "./AddToCartButton";
 
@@ -67,7 +72,7 @@ export function ProductCard({ product }: { product: Product }) {
           </Link>
         </h3>
         <p className="text-xs text-[var(--ink-mute)]">
-          {product.packLabel ?? `Por ${product.unit}`}
+          {product.packLabel ? `${product.packLabel} · por cx` : "Por cx"}
         </p>
 
         <div className="mt-auto pt-3">
@@ -80,7 +85,7 @@ export function ProductCard({ product }: { product: Product }) {
             <p className="text-[1.05rem] font-semibold tracking-tight text-[var(--forest)]">
               {formatBRL(product.price)}
               <span className="ml-1 text-[0.7rem] font-medium text-[var(--ink-mute)]">
-                / {product.unit}
+                / {formatSaleUnit(product.unit)}
               </span>
             </p>
           ) : (

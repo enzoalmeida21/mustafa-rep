@@ -30,7 +30,7 @@ export function AddToCartButton({
     return (
       <button
         type="button"
-        aria-label={`Adicionar ${product.name} ao pedido`}
+        aria-label={`Adicionar 1 cx de ${product.name} ao pedido`}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();

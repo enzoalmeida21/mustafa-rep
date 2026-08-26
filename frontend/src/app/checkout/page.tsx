@@ -5,7 +5,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import { useCart } from "@/lib/cart";
-import { formatBRL, formatProductName } from "@/lib/format";
+import { formatBRL, formatProductName, formatSaleQty } from "@/lib/format";
 
 const UF = [
   "AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB",
@@ -145,7 +145,7 @@ export default function CheckoutPage() {
             >
               <span className="text-[var(--ink-soft)]">
                 <span className="font-semibold text-[var(--ink)]">
-                  {item.quantity}×
+                  {formatSaleQty(item.quantity, item.unit)}
                 </span>{" "}
                 {formatProductName(item.name)}
               </span>

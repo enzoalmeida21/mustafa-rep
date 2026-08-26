@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { useAdminAuth } from "@/lib/admin-auth";
-import { formatBRL, formatDate, ORDER_STATUS_LABEL } from "@/lib/format";
+import { formatBRL, formatDate, formatSaleQty, ORDER_STATUS_LABEL } from "@/lib/format";
 import type { Order, OrderStatus } from "@/lib/types";
 
 const statuses: OrderStatus[] = [
@@ -98,7 +98,7 @@ export default function AdminOrdersPage() {
               {order.items?.map((item) => (
                 <li key={item.id} className="flex justify-between gap-3">
                   <span>
-                    {item.quantity}× {item.productName}
+                    {formatSaleQty(item.quantity, item.unit)} {item.productName}
                   </span>
                   <span>{formatBRL(item.lineTotal)}</span>
                 </li>

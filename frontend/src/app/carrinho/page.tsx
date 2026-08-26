@@ -3,10 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
-import { formatBRL, formatProductName, hasListPrice } from "@/lib/format";
+import {
+  formatBRL,
+  formatProductName,
+  formatSaleUnit,
+  hasListPrice,
+} from "@/lib/format";
 
 export default function CartPage() {
-  const { items, subtotal, updateQuantity, removeItem } = useCart();
+  const { items, count, subtotal, updateQuantity, removeItem } = useCart();
 
   return (
     <div className="container py-12 md:py-16">
@@ -15,7 +20,7 @@ export default function CartPage() {
         Seu pedido
       </h1>
       <p className="mt-4 max-w-xl leading-relaxed text-[var(--ink-soft)]">
-        Ajuste as quantidades e siga para o envio. Sem pagamento online — a
+        Ajuste as caixas e siga para o envio. Sem pagamento online — a
         Mustafá confirma o atendimento depois.
       </p>
 
@@ -73,14 +78,17 @@ export default function CartPage() {
 
                     <p className="mt-1 text-sm text-[var(--ink-mute)]">
                       {formatBRL(item.price)}
-                      {hasListPrice(item.price) ? ` / ${item.unit}` : ""}
+                      {hasListPrice(item.price)
+                        ? ` / ${formatSaleUnit(item.unit)}`
+                        : ""}
+                      {item.packLabel ? ` · ${item.packLabel}` : ""}
                     </p>
 
                     <div className="mt-4 flex flex-wrap items-center gap-4">
                       <div className="inline-flex items-center rounded-full border border-[var(--line-strong)] bg-white">
                         <button
                           type="button"
-                          aria-label={`Diminuir quantidade de ${item.name}`}
+                          aria-label={`Diminuir caixas de ${item.name}`}
                           disabled={item.quantity <= 1}
                           onClick={() =>
                             updateQuantity(item.productId, item.quantity - 1)
@@ -90,7 +98,7 @@ export default function CartPage() {
                           <span aria-hidden>−</span>
                         </button>
                         <label className="sr-only" htmlFor={`qtd-${item.productId}`}>
-                          Quantidade de {item.name}
+                          Caixas de {item.name}
                         </label>
                         <input
                           id={`qtd-${item.productId}`}
@@ -108,7 +116,7 @@ export default function CartPage() {
                         />
                         <button
                           type="button"
-                          aria-label={`Aumentar quantidade de ${item.name}`}
+                          aria-label={`Aumentar caixas de ${item.name}`}
                           onClick={() =>
                             updateQuantity(item.productId, item.quantity + 1)
                           }
@@ -117,6 +125,9 @@ export default function CartPage() {
                           <span aria-hidden>+</span>
                         </button>
                       </div>
+                      <span className="text-xs font-semibold tracking-[0.12em] text-[var(--ink-mute)] uppercase">
+                        cx
+                      </span>
 
                       <button
                         type="button"
@@ -137,7 +148,7 @@ export default function CartPage() {
               Resumo
             </p>
             <p className="mt-1.5 text-sm text-white/60">
-              {items.length} {items.length === 1 ? "item" : "itens"}
+              {count} {count === 1 ? "caixa" : "caixas"}
             </p>
             <p className="display mt-4 text-4xl">{formatBRL(subtotal)}</p>
             <p className="mt-3 text-sm leading-relaxed text-white/65">

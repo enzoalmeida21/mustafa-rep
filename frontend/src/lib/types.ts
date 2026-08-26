@@ -84,6 +84,7 @@ export type CartItem = {
   name: string;
   price: string;
   unit: string;
+  packLabel?: string | null;
   imageUrl?: string | null;
   quantity: number;
 };

@@ -3,7 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
-import { formatBRL, formatProductName, hasListPrice } from "@/lib/format";
+import {
+  formatBRL,
+  formatProductName,
+  formatSaleUnit,
+  hasListPrice,
+} from "@/lib/format";
 import type { Product } from "@/lib/types";
 
 const COLUMNS = "md:grid-cols-[4.5rem_1.6fr_0.8fr_0.8fr_0.9fr_auto]";
@@ -53,7 +58,7 @@ function Price({ product }: { product: Product }) {
       <p className="text-[1.05rem] font-semibold tracking-tight text-[var(--forest)]">
         {formatBRL(product.price)}
         <span className="ml-1 text-[0.7rem] font-medium text-[var(--ink-mute)]">
-          / {product.unit}
+          / {formatSaleUnit(product.unit)}
         </span>
       </p>
     </>
@@ -150,7 +155,7 @@ export function IndustryProductList({ products }: { products: Product[] }) {
                 Embalagem
               </span>
               <span className="font-medium text-[var(--ink)]">
-                {product.packLabel ?? product.unit}
+                {product.packLabel ?? "1 cx"}
               </span>
             </div>
 

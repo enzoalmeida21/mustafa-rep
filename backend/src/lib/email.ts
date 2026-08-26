@@ -46,7 +46,7 @@ function formatOrderHtml(order: OrderEmailPayload, forCustomer: boolean) {
         <thead>
           <tr>
             <th align="left" style="padding:8px;border-bottom:2px solid #222">Produto</th>
-            <th align="left" style="padding:8px;border-bottom:2px solid #222">Qtd</th>
+            <th align="left" style="padding:8px;border-bottom:2px solid #222">Caixas</th>
             <th align="left" style="padding:8px;border-bottom:2px solid #222">Preço</th>
             <th align="left" style="padding:8px;border-bottom:2px solid #222">Total</th>
           </tr>
