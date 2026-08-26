@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IndustryProductList } from "@/components/IndustryProductList";
 import { api } from "@/lib/api";
+import { industryArt } from "@/lib/industry-art";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -31,6 +32,7 @@ export default async function IndustryHallPage({ params }: Props) {
   }
 
   const products = industry.products ?? [];
+  const art = industryArt(industry);
 
   return (
     <div className="pb-20">
@@ -61,26 +63,18 @@ export default async function IndustryHallPage({ params }: Props) {
             </div>
           </div>
 
-          {industry.logoImage || industry.coverImage ? (
+          {art.src ? (
             <div
-              className="relative aspect-[4/3] w-full max-w-[26rem] justify-self-center overflow-hidden rounded-[var(--radius)] shadow-[var(--shadow)] md:justify-self-end"
-              style={{
-                background: industry.logoImage?.endsWith(".png")
-                  ? industry.accentColor
-                  : "var(--paper-deep)",
-              }}
+              className="relative aspect-[4/3] w-full max-w-[26rem] justify-self-center overflow-hidden rounded-[var(--radius)] bg-white shadow-[var(--shadow)] md:justify-self-end"
+              style={art.background ? { background: art.background } : undefined}
             >
               <Image
-                src={industry.logoImage ?? industry.coverImage ?? ""}
+                src={art.src}
                 alt={`Marca ${industry.name}`}
                 fill
                 priority
                 sizes="(min-width: 768px) 26rem, 100vw"
-                className={
-                  industry.logoImage?.endsWith(".png")
-                    ? "object-contain p-8"
-                    : "object-cover"
-                }
+                className={art.isMark ? "object-contain p-10" : "object-cover"}
               />
             </div>
           ) : null}

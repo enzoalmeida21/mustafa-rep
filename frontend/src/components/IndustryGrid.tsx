@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { industryArt } from "@/lib/industry-art";
 import type { Industry } from "@/lib/types";
 
 function initials(name: string) {
@@ -40,8 +41,7 @@ export function IndustryGrid({ industries }: { industries: Industry[] }) {
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry) => {
               const total = industry._count?.products ?? 0;
-              const art = industry.logoImage ?? industry.coverImage ?? null;
-              const isMark = art?.endsWith(".png") ?? false;
+              const art = industryArt(industry);
               return (
                 <li key={industry.id}>
                   <Link
@@ -49,22 +49,20 @@ export function IndustryGrid({ industries }: { industries: Industry[] }) {
                     className="group surface flex h-full flex-col overflow-hidden rounded-[var(--radius)] transition duration-300 hover:-translate-y-0.5 hover:border-[var(--line-strong)] hover:shadow-[var(--shadow)]"
                   >
                     <div
-                      className="relative aspect-[16/10] overflow-hidden border-b border-[var(--line)]"
+                      className="relative aspect-[16/10] overflow-hidden border-b border-[var(--line)] bg-[var(--paper-deep)]"
                       style={
-                        isMark
-                          ? { background: industry.accentColor }
-                          : undefined
+                        art.background ? { background: art.background } : undefined
                       }
                     >
-                      {art ? (
+                      {art.src ? (
                         <Image
-                          src={art}
+                          src={art.src}
                           alt={`Marca ${industry.name}`}
                           fill
                           sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 90vw"
                           className={
-                            isMark
-                              ? "object-contain p-7 transition duration-500 group-hover:scale-[1.04]"
+                            art.isMark
+                              ? "object-contain p-8 transition duration-500 group-hover:scale-[1.04]"
                               : "object-cover transition duration-700 group-hover:scale-[1.04]"
                           }
                         />

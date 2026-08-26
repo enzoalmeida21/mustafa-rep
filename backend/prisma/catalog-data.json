@@ -28,9 +28,9 @@
       "slug": "h2o",
       "tagline": "Higiene pessoal com presença de PDV",
       "description": "Hall H2O: shampoos, condicionadores e linha masculina para varejo e atacarejo no Maranhão e no Nordeste.",
-      "coverImage": "/hero/expo-05.jpg",
-      "logoImage": null,
-      "accentColor": "#0277bd",
+      "coverImage": "/brand/industries/h2o.png",
+      "logoImage": "/brand/industries/h2o.png",
+      "accentColor": "#0a6b6b",
       "sortOrder": 3
     },
     {
