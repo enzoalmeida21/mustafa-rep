@@ -22,8 +22,8 @@ export function IndustryGrid({ industries }: { industries: Industry[] }) {
             Escolha a indústria
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[var(--ink-soft)] md:text-lg">
-            Cada hall reúne o mix completo da marca, com embalagem, código e
-            preço lado a lado.
+            Atendimento no Maranhão e no Nordeste. Cada hall reúne o mix da
+            marca, com embalagem, código e preço lado a lado.
           </p>
         </div>
 
@@ -40,30 +40,34 @@ export function IndustryGrid({ industries }: { industries: Industry[] }) {
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {industries.map((industry) => {
               const total = industry._count?.products ?? 0;
-              const cover = industry.coverImage ?? industry.logoImage ?? null;
+              const art = industry.logoImage ?? industry.coverImage ?? null;
+              const isMark = art?.endsWith(".png") ?? false;
               return (
                 <li key={industry.id}>
                   <Link
                     href={`/industria/${industry.slug}`}
                     className="group surface flex h-full flex-col overflow-hidden rounded-[var(--radius)] transition duration-300 hover:-translate-y-0.5 hover:border-[var(--line-strong)] hover:shadow-[var(--shadow)]"
                   >
-                    {/* A foto de PDV é o único ativo visual consistente: os
-                        campos logoImage apontam para fotos de produto. */}
-                    <div className="relative aspect-[16/10] overflow-hidden border-b border-[var(--line)]">
-                      {cover ? (
-                        <>
-                          <Image
-                            src={cover}
-                            alt=""
-                            fill
-                            sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 90vw"
-                            className="object-cover transition duration-700 group-hover:scale-[1.05]"
-                          />
-                          <div
-                            aria-hidden
-                            className="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,10,40,0.42)_0%,rgba(26,10,40,0.06)_55%,transparent_100%)]"
-                          />
-                        </>
+                    <div
+                      className="relative aspect-[16/10] overflow-hidden border-b border-[var(--line)]"
+                      style={
+                        isMark
+                          ? { background: industry.accentColor }
+                          : undefined
+                      }
+                    >
+                      {art ? (
+                        <Image
+                          src={art}
+                          alt={`Marca ${industry.name}`}
+                          fill
+                          sizes="(min-width: 1024px) 24rem, (min-width: 640px) 45vw, 90vw"
+                          className={
+                            isMark
+                              ? "object-contain p-7 transition duration-500 group-hover:scale-[1.04]"
+                              : "object-cover transition duration-700 group-hover:scale-[1.04]"
+                          }
+                        />
                       ) : (
                         <div className="brand-tile">
                           <span className="brand-tile-mark">

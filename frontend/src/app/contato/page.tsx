@@ -17,15 +17,18 @@ export default function ContactPage() {
         Fale com a Mustafá
       </h1>
       <p className="mt-5 text-[1.05rem] leading-relaxed text-[var(--ink-soft)] md:text-lg">
-        Atendimento comercial, pedidos e ativação em loja para o seu PDV.
+        Atendimento comercial no Maranhão e no Nordeste: pedidos e ativação em
+        loja para o seu PDV.
       </p>
 
       <dl className="mt-12 grid gap-8 border-y border-[var(--line)] py-10 sm:grid-cols-2">
         <div>
           <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-[var(--ink-mute)] uppercase">
-            Site
+            Região
           </dt>
-          <dd className="mt-2 font-medium text-[var(--ink)]">mustafarep.com</dd>
+          <dd className="mt-2 font-medium text-[var(--ink)]">
+            Maranhão e Nordeste
+          </dd>
         </div>
         <div>
           <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-[var(--ink-mute)] uppercase">

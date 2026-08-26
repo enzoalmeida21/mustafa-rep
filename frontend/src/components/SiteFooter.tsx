@@ -14,8 +14,8 @@ export function SiteFooter() {
         <div>
           <BrandLockup size="lg" />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-[var(--ink-soft)]">
-            Representação comercial com catálogo por indústria, preços claros e
-            pedidos simples para clientes de qualquer cidade.
+            Representação comercial no Maranhão e no Nordeste: catálogo por
+            indústria, preços claros e pedidos simples.
           </p>
         </div>
         <nav className="text-sm" aria-label="Navegação do rodapé">
@@ -55,6 +55,9 @@ export function SiteFooter() {
               </a>
             </li>
             <li className="px-2 pt-1.5 leading-relaxed text-[var(--ink-mute)]">
+              Maranhão e Nordeste
+            </li>
+            <li className="px-2 pt-1 leading-relaxed text-[var(--ink-mute)]">
               Pedidos e ativação em ponto de venda
             </li>
           </ul>

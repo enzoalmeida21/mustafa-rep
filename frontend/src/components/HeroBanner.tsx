@@ -58,7 +58,7 @@ export function HeroBanner({
 
           <p className="fade-rise-2 mt-6 text-[1.02rem] leading-relaxed text-[var(--ink-soft)] md:text-lg">
             Entre no hall de cada indústria, consulte SKU, EAN, embalagem e preço
-            e envie o pedido — de qualquer cidade, sem ruído.
+            e envie o pedido — atendimento no Maranhão e no Nordeste.
           </p>
 
           <div className="fade-rise-2 mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -74,7 +74,7 @@ export function HeroBanner({
             {[
               { value: String(industryCount), label: "Indústrias" },
               { value: String(productCount), label: "Produtos" },
-              { value: "SP", label: "Atendimento" },
+              { value: "MA", label: "Nordeste" },
             ].map((stat) => (
               <div key={stat.label}>
                 <dt className="sr-only">{stat.label}</dt>

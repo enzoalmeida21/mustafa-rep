@@ -61,15 +61,26 @@ export default async function IndustryHallPage({ params }: Props) {
             </div>
           </div>
 
-          {industry.coverImage ? (
-            <div className="relative aspect-[4/3] w-full max-w-[26rem] justify-self-center overflow-hidden rounded-[var(--radius)] bg-[var(--paper-deep)] shadow-[var(--shadow)] md:justify-self-end">
+          {industry.logoImage || industry.coverImage ? (
+            <div
+              className="relative aspect-[4/3] w-full max-w-[26rem] justify-self-center overflow-hidden rounded-[var(--radius)] shadow-[var(--shadow)] md:justify-self-end"
+              style={{
+                background: industry.logoImage?.endsWith(".png")
+                  ? industry.accentColor
+                  : "var(--paper-deep)",
+              }}
+            >
               <Image
-                src={industry.coverImage}
-                alt=""
+                src={industry.logoImage ?? industry.coverImage ?? ""}
+                alt={`Marca ${industry.name}`}
                 fill
                 priority
                 sizes="(min-width: 768px) 26rem, 100vw"
-                className="object-cover"
+                className={
+                  industry.logoImage?.endsWith(".png")
+                    ? "object-contain p-8"
+                    : "object-cover"
+                }
               />
             </div>
           ) : null}

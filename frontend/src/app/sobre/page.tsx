@@ -21,9 +21,8 @@ export default function AboutPage() {
 
         <div className="mt-10 space-y-6 text-[1.05rem] leading-relaxed text-[var(--ink-soft)] md:text-lg">
           <p>
-            A Mustafá Representações conecta marcas e clientes com execução em
-            loja, catálogo claro e pedidos simples para quem está em qualquer
-            cidade.
+            A Mustafá Representações conecta marcas e clientes no Maranhão e no
+            Nordeste, com execução em loja, catálogo claro e pedidos simples.
           </p>
           <p>
             Nosso portal foi feito para facilitar a decisão de compra: ver
@@ -44,10 +43,10 @@ export default function AboutPage() {
           </div>
           <div>
             <dt className="text-[0.68rem] font-semibold tracking-[0.16em] text-[var(--ink-mute)] uppercase">
-              Atuação
+              Atendimento
             </dt>
             <dd className="mt-2 text-[var(--ink-soft)]">
-              Catálogo por indústria e ativação em ponto de venda
+              Maranhão e Nordeste — catálogo por indústria e ativação em PDV
             </dd>
           </div>
         </dl>
