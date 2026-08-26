@@ -124,7 +124,7 @@
       "featured": true,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/4248.jpg"
     },
     {
       "brand": "Oliveira",
@@ -139,7 +139,7 @@
       "featured": true,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/13046.jpg"
     },
     {
       "brand": "Oliveira",
@@ -154,7 +154,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/13148.jpg"
     },
     {
       "brand": "Oliveira",
@@ -165,11 +165,11 @@
       "unit": "unid.",
       "packLabel": "50 un./cx",
       "ean": "789620259456",
-      "sku": null,
+      "sku": "789620259456",
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/789620259456.jpg"
     },
     {
       "brand": "Oliveira",
@@ -184,7 +184,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/5454.jpg"
     },
     {
       "brand": "Oliveira",
@@ -199,7 +199,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/9945.jpg"
     },
     {
       "brand": "Oliveira",
@@ -214,7 +214,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/9947.jpg"
     },
     {
       "brand": "Oliveira",
@@ -229,7 +229,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/11657.jpg"
     },
     {
       "brand": "Oliveira",
@@ -244,7 +244,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/16096.jpg"
     },
     {
       "brand": "Oliveira",
@@ -259,7 +259,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/13113.jpg"
     },
     {
       "brand": "Oliveira",
@@ -274,7 +274,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/16115.jpg"
     },
     {
       "brand": "Oliveira",
@@ -289,22 +289,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
-    },
-    {
-      "brand": "Oliveira",
-      "name": "Doce Beijo de Moça Oliveira 25g",
-      "slug": "oliveira-doce-beijo-de-moca-oliveira-25g-18866",
-      "description": "Doce Beijo de Moça Oliveira 25g. Embalagem: 96 un./cx. EAN 7896202892283.",
-      "price": 1.13,
-      "unit": "unid.",
-      "packLabel": "96 un./cx",
-      "ean": "7896202892283",
-      "sku": "18866",
-      "featured": false,
-      "industryKey": "oliveira",
-      "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/18687.jpg"
     },
     {
       "brand": "Oliveira",
@@ -319,7 +304,7 @@
       "featured": false,
       "industryKey": "oliveira",
       "categorySlug": "doces-mercearia",
-      "imageUrl": null
+      "imageUrl": "/products/oliveira/18865.jpg"
     },
     {
       "brand": "Casafort",
