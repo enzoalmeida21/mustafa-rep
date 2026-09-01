@@ -15,7 +15,16 @@ export async function generateMetadata({ params }: Props) {
     const industry = await api.getIndustry(slug);
     return {
       title: `Hall ${industry.name}`,
-      description: industry.description ?? industry.tagline ?? undefined,
+      description:
+        industry.description ??
+        industry.tagline ??
+        `Mix ${industry.name} representado pela Mustafá. Preço por caixa.`,
+      openGraph: {
+        title: `${industry.name} — Mustafá Representações`,
+        description:
+          industry.tagline ??
+          `Veja os produtos ${industry.name} que a Mustafá vende.`,
+      },
     };
   } catch {
     return { title: "Indústria" };
@@ -38,7 +47,7 @@ export default async function IndustryHallPage({ params }: Props) {
     <div className="pb-20">
       <section className="container pt-8 pb-4 md:pt-12">
         <Link
-          href="/#industrias"
+          href="/vitrine"
           className="inline-flex h-9 items-center text-[0.68rem] font-semibold tracking-[0.16em] text-[var(--ink-mute)] uppercase transition hover:text-[var(--forest)]"
         >
           ← Todas as indústrias

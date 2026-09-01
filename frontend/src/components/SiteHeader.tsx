@@ -13,7 +13,7 @@ import { useCart } from "@/lib/cart";
 import { BrandLockup } from "./BrandLockup";
 
 const links = [
-  { href: "/#industrias", label: "Indústrias" },
+  { href: "/vitrine", label: "Indústrias" },
   { href: "/catalogo", label: "Catálogo" },
   { href: "/sobre", label: "Sobre" },
   { href: "/contato", label: "Contato" },

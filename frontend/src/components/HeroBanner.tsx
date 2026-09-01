@@ -62,7 +62,7 @@ export function HeroBanner({
           </p>
 
           <div className="fade-rise-2 mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Link href="/#industrias" className="btn btn-primary">
+            <Link href="/vitrine" className="btn btn-primary">
               Escolher indústria
             </Link>
             <Link href="/catalogo" className="btn btn-secondary">

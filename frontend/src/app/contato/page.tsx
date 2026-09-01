@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "Contato",
 };
@@ -18,7 +20,11 @@ export default function ContactPage() {
       </h1>
       <p className="mt-5 text-[1.05rem] leading-relaxed text-[var(--ink-soft)] md:text-lg">
         Atendimento comercial no Maranhão e no Nordeste: pedidos e ativação em
-        loja para o seu PDV.
+        loja para o seu PDV. Para ver o mix por marca, abra a{" "}
+        <Link href="/vitrine" className="font-medium text-[var(--forest)] underline-offset-4 hover:underline">
+          vitrine por indústria
+        </Link>
+        .
       </p>
 
       <dl className="mt-12 grid gap-8 border-y border-[var(--line)] py-10 sm:grid-cols-2">

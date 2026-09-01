@@ -24,7 +24,7 @@ export function SiteFooter() {
           </p>
           <ul className="-mx-2 grid text-[var(--ink-soft)]">
             {[
-              { href: "/#industrias", label: "Indústrias" },
+              { href: "/vitrine", label: "Indústrias" },
               { href: "/catalogo", label: "Catálogo" },
               { href: "/sobre", label: "Sobre" },
               { href: "/contato", label: "Contato" },
